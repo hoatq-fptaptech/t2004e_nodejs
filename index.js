@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
-
-app.listen(5000,function () {
+const PORT = process.env.PORT || 5000;
+app.listen(PORT,function () {
     console.log("server is running...");
 });
 app.use(express.static("public"));
@@ -46,4 +46,26 @@ app.get("/thanh-pho/:id",function (req,res) {
     res.render("city",{
         city:city
     });
-})
+});
+app.get("/api/messages",function (req,res) {
+   let data = [
+       {
+           msg: "Xin chao",
+           name: "Luna"
+       },
+       {
+           msg:"Hi",
+           name:"Long"
+       },
+       {
+           msg:"Di choi ko?",
+           name:"Luna"
+       }
+   ];
+   let rs = {
+       status: true,
+       message: "Success",
+       data: data
+   };
+   res.send(rs);
+});
